@@ -10,18 +10,22 @@ import (
 
 var reader = bufio.NewReader(os.Stdin)
 
+const mainTitle = "BMI Calculator"
+const separator = "------------------------"
+const weightInputPrompt = "Enter your weight (lb): "
+const heightInputPrompt = "Enter height (feet): "
+
 func main() {
-	fmt.Println("Hello World!")
 
 	// out information to the user
-	fmt.Println("BMI Calculator")
-	fmt.Println("------------------------")
+	fmt.Println(mainTitle)
+	fmt.Println(separator)
 
 	// prompt for the user input (weight + height)
-	fmt.Print("Enter your weight (lb): ")
+	fmt.Print(weightInputPrompt)
 	weightInput, _ := reader.ReadString('\n')
 
-	fmt.Print("Enter height (feet): ")
+	fmt.Print(heightInputPrompt)
 	heightInput, _ := reader.ReadString('\n')
 
 	// save the user input in variables
