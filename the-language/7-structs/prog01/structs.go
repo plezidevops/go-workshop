@@ -16,6 +16,12 @@ type User struct {
 	createdDate time.Time
 }
 
+// receiver function that connects the function to the User struct
+func (user *User) outputDetails() {
+	fmt.Printf("My name is %v %v. I was born on %v", 
+	user.firstName, user.lastName, user.birthdate)
+}
+
 // helper function to create structs
 func NewUser(fName, lName, bDate string) *User {
 	created := time.Now()
@@ -44,12 +50,7 @@ func main() {
 	newUser = NewUser(firstName, lastName, birthdate)
 
 	// fmt.Println(newUser)
-	outputUserDetails(newUser) 
-}
-
-func outputUserDetails(user *User) {
-	fmt.Printf("My name is %v %v. I was born on %v", 
-	user.firstName, user.lastName, user.birthdate)
+	newUser.outputDetails() 
 }
 
 func getUserData(promptText string) string {
