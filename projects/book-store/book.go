@@ -9,22 +9,23 @@ import (
 	"strings"
 )
 
-var reader = bufio.NewReader(os.Stdin)
-
+// define a product type
 type Product struct {
-	id string
-	title string
+	id          string
+	title       string
 	description string
-	price float64
+	price       float64
 }
 
-func (product Product) outputDetails() {
+// Print product on the screen
+func (product *Product) outputDetails() {
 	fmt.Println("Production Information")
-	fmt.Printf("ID: %v\nTitle: %v\nDescription: %v\nPrice: %.2f\n", 
-	product.id, product.title, product.description, product.price)
+	fmt.Printf("ID: %v\nTitle: %v\nDescription: %v\nPrice USD: %.2f\n",
+		product.id, product.title, product.description, product.price)
 }
 
-func (store Product) saveToFile() {
+// save product to file
+func (store *Product) saveToFile() {
 	// get the current path
 
 	// Create a file
@@ -37,48 +38,53 @@ func (store Product) saveToFile() {
 }
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
+// func NewProduct(id, title, description string, price float64) *Product {
+
+// 	product := Product{
+// 		id:          id,
+// 		title:       title,
+// 		description: description,
+// 		price:       price,
+// 	}
+
+// 	return &product
+// }
+
+// Create new product
 func NewProduct(id, title, description string, price float64) *Product {
 
-	product := Product {
-		id: id,
-		title: title,
-		description: description,
-		price: price,
+	return &Product{
+		id,
+		title,
+		description,
+		price,
 	}
-
-	return &product
 }
 
-func main() {
+// Prompt user to enter product
+func enterProduct() (id, title, description, price string) {
+	fmt.Println("Enter a new product")
+	fmt.Println("-------------------")
+	id = getUserData("Enter the product ID: ")
+	title = getUserData("Enter the product title: ")
+	description = getUserData("Enter Product description: ")
+	price = getUserData("Enter Product price: ")
 
-	var product *Product
-
-	id := getUserData("Enter the product ID: ")
-	title := getUserData("Enter the product title: ")
-	description := getUserData("Enter Product description: ")
-	price := getUserData("Enter Product price: ")
-
-	if p, err := strconv.ParseFloat(price, 64); err == nil {
-		product = NewProduct(id, title, description,  p)
-	} else {
-		fmt.Println(err, p)
-		fmt.Println("Invalid price")
-	}
-	
-	product.outputDetails()
-	product.saveToFile()
+	return
 }
 
+// read product
 func getUserData(promptText string) string {
+	var reader = bufio.NewReader(os.Stdin)
 	fmt.Print(promptText)
 	userInput, _ := reader.ReadString('\n')
 
-	var cleanedInput string;
+	var cleanedInput string
 
 	if runtime.GOOS == "windows" {
 		cleanedInput = strings.Replace(userInput, "\r\n", "", -1)
@@ -88,6 +94,21 @@ func getUserData(promptText string) string {
 	return cleanedInput
 }
 
+func main() {
+
+	var product *Product
+	id, title, description, price := enterProduct()
+
+	if p, err := strconv.ParseFloat(price, 64); err == nil {
+		product = NewProduct(id, title, description, p)
+	} else {
+		fmt.Println(err, p)
+		fmt.Println("Invalid price")
+	}
+
+	product.outputDetails()
+	product.saveToFile()
+}
 
 // Your Tasks
 // 1) Create a new type / data structure for storing product data (e.g. about a book)
