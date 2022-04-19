@@ -42,7 +42,7 @@ func check(e error) {
     }
 }
 
-func NewProduct(id, title, description string, price float64) Product {
+func NewProduct(id, title, description string, price float64) *Product {
 
 	product := Product {
 		id: id,
@@ -51,12 +51,12 @@ func NewProduct(id, title, description string, price float64) Product {
 		price: price,
 	}
 
-	return product
+	return &product
 }
 
 func main() {
 
-	var product Product
+	var product *Product
 
 	id := getUserData("Enter the product ID: ")
 	title := getUserData("Enter the product title: ")
