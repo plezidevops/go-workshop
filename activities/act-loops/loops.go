@@ -1,3 +1,5 @@
+// The code needs to refactor
+
 package main
 
 import (
@@ -5,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -23,7 +26,7 @@ func getUserChoice() (string, error) {
 		return "", err
 	}
 
-	strings.Replace(userInput, "\n", "", -1)
+	userInput = strings.Replace(userInput, "\n", "", -1)
 
 	if userInput == "1" ||
 		userInput == "2" ||
@@ -35,16 +38,112 @@ func getUserChoice() (string, error) {
 	}
 }
 
-func calculateSumUpToNumber() {}
+func calculateSumUpToNumber() {
+	fmt.Print("Please enter the numbers: ")
+	chosenNumber, err := getInputNumber()
 
-func calculateFactorial() {}
+	if err != nil {
+		fmt.Println("Invalid Input")
+		return
+	}
 
-func calculateSumManually() {}
+	sum := 0
+	for i := 1; i <= chosenNumber; i++ {
+		sum += i
+	}
 
-func calculateListSum() {}
+	fmt.Printf("Result: %v", sum)
+}
+
+func calculateFactorial() {
+
+	fmt.Print("Please enter the numbers: ")
+	chosenNumber, err := getInputNumber()
+
+	if err != nil {
+		fmt.Println("Invalid Input")
+		return
+	}
+
+	sum := 1
+
+	for i := 1; i <= chosenNumber; i++ {
+		sum *= i
+	}
+
+	fmt.Printf("Result: %v", sum)
+}
+
+func calculateSumManually() {
+
+	fmt.Print("Please enter another number (enter 0 or anything else to exit): ")
+	enteredNumber, err := getInputNumber()
+
+	if err != nil {
+		fmt.Println("Invalid Input")
+		return
+	}
+
+	result := 0
+
+	for enteredNumber > 0 {
+
+		result += enteredNumber
+		fmt.Print("Please enter another number (enter 0 or anything else to exit): ")
+		enteredNumber, err = getInputNumber()
+
+		if err != nil {
+			fmt.Println("Invalid Input")
+			return
+		}
+	}
+	fmt.Printf("Result: %v", result)
+}
+
+func calculateListSum() {
+
+	numbers := getNumberList()
+	sum := 0
+
+	for n := range numbers {
+		num, _ := strconv.ParseInt(numbers[n], 0, 64)
+		sum += int(num)
+	}
+	fmt.Println(sum)
+}
+
+func getNumberList() (numbers []string) {
+
+	fmt.Print("Please enter the numbers: ")
+	inputNumbers, _ := reader.ReadString('\n')
+
+	inputNumbers = strings.Replace(inputNumbers, "\n", "", -1)
+	numbers = strings.Split(inputNumbers, " ")
+
+	return
+}
+
+func getInputNumber() (int, error) {
+	inputNumber, err := reader.ReadString('\n')
+
+	if err != nil {
+		return 0, err
+	}
+
+	inputNumber = strings.Replace(inputNumber, "\n", "", -1)
+	chosenNumber, err := strconv.ParseInt(inputNumber, 0, 64)
+
+	if err != nil {
+		return 0, nil
+	}
+
+	return int(chosenNumber), err
+}
 
 func main() {
 	selectChoice, err := getUserChoice()
+
+	fmt.Println(err)
 
 	if err != nil {
 		fmt.Println("Invalid choice, exiting!")
