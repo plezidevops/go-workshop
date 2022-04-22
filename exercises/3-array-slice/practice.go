@@ -44,7 +44,7 @@ func main() {
 		price float64
 	}
 
-	product := []Product{
+	products := []Product{
 		{
 			title: "keyboard",
 			id:    "ID101",
@@ -68,11 +68,12 @@ func main() {
 		price: 999.99,
 	}
 
-	newProduct := append(product, prod)
+	newProducts := append(products, prod)
+	fmt.Println(newProducts)
 
-	for _, p := range newProduct {
-		fmt.Println(p)
-	}
+	// for _, p := range newProduct {
+	// 	fmt.Println(p)
+	// }
 
 }
 
