@@ -118,10 +118,6 @@ func getNumberList() (numbers []string) {
 func getInputNumber() (int, error) {
 	inputNumber, err := reader.ReadString('\n')
 
-	// if err != nil {
-	// 	return 0, err
-	// }
-
 	inputNumber = strings.Replace(inputNumber, "\n", "", -1)
 	chosenNumber, err := strconv.ParseInt(inputNumber, 0, 64)
 
