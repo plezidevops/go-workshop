@@ -76,27 +76,19 @@ func calculateFactorial() {
 
 func calculateSumManually() {
 
-	fmt.Print("Please enter another number (enter 0 or anything else to exit): ")
-	enteredNumber, err := getInputNumber()
+	fmt.Println("Please enter another number (anything non-numbers to exit): ")
 
-	if err != nil {
-		fmt.Println("Invalid Input")
-		return
-	}
-
+	isMoreNumber := true
 	result := 0
 
-	for enteredNumber > 0 {
+	for isMoreNumber {
 
-		result += enteredNumber
-		fmt.Print("Please enter another number (enter 0 or anything else to exit): ")
-		enteredNumber, err = getInputNumber()
-
-		if err != nil {
-			fmt.Println("Invalid Input")
-			return
-		}
+		enteredNumber, err := getInputNumber()
+		fmt.Println(err)
+		result = result + enteredNumber
+		isMoreNumber = err == nil
 	}
+
 	fmt.Printf("Result: %v", result)
 }
 
@@ -126,15 +118,15 @@ func getNumberList() (numbers []string) {
 func getInputNumber() (int, error) {
 	inputNumber, err := reader.ReadString('\n')
 
-	if err != nil {
-		return 0, err
-	}
+	// if err != nil {
+	// 	return 0, err
+	// }
 
 	inputNumber = strings.Replace(inputNumber, "\n", "", -1)
 	chosenNumber, err := strconv.ParseInt(inputNumber, 0, 64)
 
 	if err != nil {
-		return 0, nil
+		return 0, err
 	}
 
 	return int(chosenNumber), err
