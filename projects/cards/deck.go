@@ -5,18 +5,22 @@ import "fmt"
 // create a new type of deck
 // which a slice of string
 
-// here we are defining a new type called deck that extends another type string
+// here we are defining a new type called deck that sor t of extends another type string
 type deck []string
 
-// Creating and returning a list of cards
+// newDeck creating and returning a deck of cards
 func newDeck() deck {
+	// to hold the deck of cards
 	cards := deck{}
 
+	// list of cards and their values
 	cardSuites := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
 	cardValues := []string{"Ace", "Two", "Three", "Four"}
 
+	// creating the card suites
 	for _, suit := range cardSuites {
 		for _, value := range cardValues {
+			// add cards to the deck
 			cards = append(cards, value+" of "+suit)
 		}
 	}
@@ -31,6 +35,7 @@ func (d deck) print() { // receiver (d deck) on a function
 	}
 }
 
-func deal(d deck, handSize int) {
-
+// deal creates a hand of card
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
 }
