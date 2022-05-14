@@ -1,13 +1,19 @@
 package main
 
+import "fmt"
+
 func main() {
-	cards := newDeck()
+	// cards := newDeck()
 
-	// cards.print() //call the print function and passed deck reference to it
+	// // cards.print() //call the print function and passed deck reference to it
 
-	hand, remainingDeck := deal(cards, 5)
+	// hand, remainingDeck := deal(cards, 5)
 
-	hand.print()
-	remainingDeck.print()
+	// hand.print()
+	// remainingDeck.print()
+
+	greeting := "Hi there!"
+
+	fmt.Println([]byte(greeting))
 
 }

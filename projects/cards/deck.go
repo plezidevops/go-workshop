@@ -39,3 +39,12 @@ func (d deck) print() { // receiver (d deck) on a function
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
+
+// shuffle all the cards in the deck
+func shuffle(d deck) deck {
+	return d
+}
+
+// saves a deck to the hard drive
+func saveFile
+// loading a list od cards from the hard drive
