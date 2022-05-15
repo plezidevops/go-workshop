@@ -1,19 +1,12 @@
 package main
 
-import "fmt"
-
 func main() {
-	// cards := newDeck()
+	//cards := newDeck()
+	//cards.saveToFile("mycards.txt")
+	//cards = newDeckFromFile("mycards.txt")
+	//fmt.Println(cards)
 
-	// // cards.print() //call the print function and passed deck reference to it
-
-	// hand, remainingDeck := deal(cards, 5)
-
-	// hand.print()
-	// remainingDeck.print()
-
-	greeting := "Hi there!"
-
-	fmt.Println([]byte(greeting))
-
+	cards := newDeck()
+	cards.shuffle()
+	cards.print()
 }
